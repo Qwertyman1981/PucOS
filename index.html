@@ -1,1 +1,118 @@
-e
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PucOS – Retro Modern Operating System</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+      color: #00ffcc;
+      font-family: 'Share Tech Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #00ffcc, 0 0 30px #00ffaa;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #aaffee;
+      text-shadow: 0 0 8px #00ffee;
+      max-width: 600px;
+      line-height: 1.6em;
+      margin: 10px auto 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    a.button {
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 10px 20px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.9em;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 10px #00ffcc50;
+    }
+
+    a.button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffaa;
+    }
+
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.03) 0px,
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.8em;
+      opacity: 0.6;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0.2; }
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 20px;
+      background: #00ffcc;
+      margin-left: 5px;
+      animation: blink 1s infinite;
+    }
+  </style>
+</head>
+<body>
+  <h1>PucOS</h1>
+  <p>The retro-modern operating system.<br>
+     Minimal. Fast. Beautifully nostalgic.<span class="cursor"></span></p>
+
+  <div class="buttons">
+    <a href="#" class="button">Download</a>
+    <a href="#" class="button">Docs</a>
+    <a href="#" class="button">GitHub</a>
+  </div>
+
+  <footer>© 2025 PucOS — Built with love and command lines</footer>
+
+  <div class="scanlines"></div>
+</body>
+</html>
