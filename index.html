@@ -15,25 +15,55 @@
 
     body {
       font-family: 'IBM Plex Mono', monospace;
-      background: radial-gradient(circle at center, #101010 0%, #050505 100%);
-      color: #e0e0e0;
+      background: black;
+      color: #00ffc6;
+      height: 100vh;
+      overflow: hidden;
       display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Boot screen */
+    #boot-screen {
+      background: black;
+      color: #00ffc6;
+      font-size: 0.9rem;
+      width: 90%;
+      max-width: 800px;
+      white-space: pre-wrap;
+      overflow: hidden;
+      border: 1px solid #00ffc6;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,255,198,0.3);
+      animation: flicker 2s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.9; }
+    }
+
+    /* Main UI */
+    #main {
+      display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      overflow: hidden;
+      text-align: center;
+      color: #e0e0e0;
+      background: radial-gradient(circle at center, #101010 0%, #050505 100%);
       position: relative;
+      overflow: hidden;
     }
 
-    /* Animated background grid */
-    body::before {
+    /* Background grid */
+    #main::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background-image: linear-gradient(90deg, rgba(0,255,180,0.05) 1px, transparent 1px),
                         linear-gradient(rgba(0,255,180,0.05) 1px, transparent 1px);
       background-size: 40px 40px;
@@ -49,10 +79,9 @@
     h1 {
       font-size: 3rem;
       color: #00ffc6;
-      letter-spacing: 1px;
-      z-index: 1;
       text-shadow: 0 0 10px #00ffc6;
-      animation: fadeIn 1.5s ease forwards;
+      z-index: 1;
+      animation: fadeIn 1.2s ease forwards;
     }
 
     .bar {
@@ -62,6 +91,7 @@
       margin: 15px 0 25px;
       box-shadow: 0 0 10px #00ffc6;
       animation: growBar 1s ease forwards;
+      z-index: 1;
     }
 
     p {
@@ -117,7 +147,6 @@
       bottom: 20px;
       font-size: 0.8rem;
       color: #666;
-      letter-spacing: 0.5px;
       z-index: 1;
     }
 
@@ -133,13 +162,52 @@
   </style>
 </head>
 <body>
-  <h1>PucOS</h1>
-  <div class="bar"></div>
-  <p>A lightweight, retro-futuristic operating system built for simplicity and style.<br>
-     Fast. Minimal. Beautiful.</p>
+  <!-- Boot-up simulation -->
+  <div id="boot-screen"></div>
 
-  <a href="https://drive.google.com/file/d/1wrjR09Jo7OpaHTYSZw_PQfWd-QTsi7Dl" class="button">Download</a>
+  <!-- Main UI -->
+  <div id="main">
+    <h1>PucOS</h1>
+    <div class="bar"></div>
+    <p>A lightweight, retro-futuristic operating system built for simplicity and style.<br>
+       Fast. Minimal. Beautiful.</p>
+    <a href="https://drive.google.com/file/d/1wrjR09Jo7OpaHTYSZw_PQfWd-QTsi7Dl" class="button">Download</a>
+    <footer>PucOS © 2025</footer>
+  </div>
 
-  <footer>PucOS © 2025</footer>
+  <script>
+    const bootLines = [
+      "PucOS v1.4 (build 2025.10.20)",
+      "--------------------------------------",
+      "Initializing kernel modules...",
+      "Mounting virtual drives...",
+      "Starting network services...",
+      "Checking memory integrity... OK",
+      "Loading UI components...",
+      "Establishing secure session...",
+      "All systems operational.",
+      "",
+      "Launching interface..."
+    ];
+
+    const bootScreen = document.getElementById("boot-screen");
+    const mainScreen = document.getElementById("main");
+
+    let index = 0;
+    function typeLine() {
+      if (index < bootLines.length) {
+        bootScreen.innerHTML += bootLines[index] + "\n";
+        index++;
+        setTimeout(typeLine, 400);
+      } else {
+        setTimeout(() => {
+          bootScreen.style.display = "none";
+          mainScreen.style.display = "flex";
+        }, 1000);
+      }
+    }
+
+    window.onload = () => typeLine();
+  </script>
 </body>
 </html>
