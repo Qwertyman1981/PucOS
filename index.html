@@ -7,81 +7,138 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap');
 
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'IBM Plex Mono', monospace;
-      background-color: #0c0c0c;
-      color: #d8d8d8;
+      background: radial-gradient(circle at center, #101010 0%, #050505 100%);
+      color: #e0e0e0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated background grid */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(90deg, rgba(0,255,180,0.05) 1px, transparent 1px),
+                        linear-gradient(rgba(0,255,180,0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridMove 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes gridMove {
+      from { background-position: 0 0, 0 0; }
+      to { background-position: 40px 40px, 40px 40px; }
     }
 
     h1 {
-      color: #00cfa5;
-      font-size: 2.2rem;
-      margin-bottom: 10px;
+      font-size: 3rem;
+      color: #00ffc6;
+      letter-spacing: 1px;
+      z-index: 1;
+      text-shadow: 0 0 10px #00ffc6;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .bar {
+      width: 60px;
+      height: 3px;
+      background-color: #00ffc6;
+      margin: 15px 0 25px;
+      box-shadow: 0 0 10px #00ffc6;
+      animation: growBar 1s ease forwards;
     }
 
     p {
-      max-width: 520px;
-      font-size: 0.95rem;
+      font-size: 1rem;
+      max-width: 600px;
       color: #a8a8a8;
-      margin-bottom: 30px;
-      line-height: 1.5;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      justify-content: center;
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeIn 1.5s ease 0.8s forwards;
+      z-index: 1;
     }
 
     a.button {
       text-decoration: none;
-      color: #00cfa5;
-      border: 1px solid #00cfa5;
-      padding: 8px 18px;
-      border-radius: 3px;
-      font-size: 0.85rem;
-      transition: 0.2s ease;
+      color: #00ffc6;
+      border: 1px solid #00ffc6;
+      padding: 12px 28px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s ease;
+      z-index: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    a.button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #00ffc6;
+      transition: 0.3s;
+      z-index: -1;
+    }
+
+    a.button:hover::before {
+      left: 0;
     }
 
     a.button:hover {
-      background: #00cfa5;
       color: #0c0c0c;
+      box-shadow: 0 0 15px #00ffc6;
     }
 
     footer {
       position: absolute;
       bottom: 20px;
       font-size: 0.8rem;
-      color: #555;
+      color: #666;
+      letter-spacing: 0.5px;
+      z-index: 1;
     }
 
-    .bar {
-      width: 40px;
-      height: 2px;
-      background-color: #00cfa5;
-      margin: 15px 0 25px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes growBar {
+      from { width: 0; opacity: 0; }
+      to { width: 60px; opacity: 1; }
     }
   </style>
 </head>
 <body>
   <h1>PucOS</h1>
   <div class="bar"></div>
-  <p>A small, retro-inspired operating system.<br>
-     </p>
+  <p>A lightweight, retro-futuristic operating system built for simplicity and style.<br>
+     Fast. Minimal. Beautiful.</p>
 
-  <div class="buttons">
-    <a href="https://drive.google.com/file/d/1wrjR09Jo7OpaHTYSZw_PQfWd-QTsi7Dl" class="button">Download</a>
-    <a href="#" class="button">Docs</a>
-    <a href="#" class="button">Source</a>
-  </div>
+  <a href="https://drive.google.com/file/d/1wrjR09Jo7OpaHTYSZw_PQfWd-QTsi7Dl" class="button">Download</a>
 
   <footer>PucOS © 2025</footer>
 </body>
